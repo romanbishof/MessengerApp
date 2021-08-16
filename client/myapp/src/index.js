@@ -9,4 +9,3 @@ ReactDOM.render(<App />, document.querySelector('#root'));
 
 // this is basecly a taamplate for every reat app 
 
-export default index;
