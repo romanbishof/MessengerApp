@@ -1,5 +1,11 @@
 const express = require('express');
-const socketio = require('socket.io');
+const socketio = require('socket.io')(httpServer, {
+    cors: {
+        origin: "http://localhost:5000",
+        methods: ["GET", "POST"],
+        credentials: true
+    }
+});
 
 // build in module
 const http = require('http');
@@ -16,8 +22,14 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 // using the build in method to register clients joining and leving our app
-io.console('connection', (socket) => {
+io.on('connection', (socket) => {
     console.log(('We have new connection!!!'));
+
+    socket.on('join', ({name, room }, callback) => {
+        console.log(name, room);
+
+        
+    })
 
     socket.on('disconnect', () => {
         console.log('User had left!!!');
